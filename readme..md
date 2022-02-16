@@ -76,5 +76,47 @@
 - When run "migrate up" command, up-script file in db/migrate folder will be run sequentially by the order of their prefix version 1->2->3
 - On the contrary, "migrate down" 3->2->1
 
+```shell
+    migrate create -ext sql -dir db/migration -seq init_schema
+    # -ext tag: extensioin
+    # -dir tag: follow directory for store it
+    # -sed tag: q sequential version number of the migrate file
+```
 
-3.1.
+```shell
+    #
+   	migrate -path db/migration -database "postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable" -verbose up
+```
+
+- "schema_migrations" stores the latest applied migrate version
+- dirty column tells us if the last migrate has failed or not
+
+## 4 - CRUD
+
+### 4.1 - What is CRUD
+
+- Create: insert new records to database
+- Read: select of search fro records in the database
+- Update: change some fields of the record in the database
+- Detele: delete records
+
+### 4.1 CURD in Golang
+- Using package "database/sql"
+    - Fast & straightforward
+    - Manual mapping SQL fields to variables
+    - Easy to make mistakes
+- Using package "GORM"
+    - Short code (only need declare the models adn call the functions that gorm provides)
+    - Must learn  to write querries using gorm's function
+    - run slowly on high load
+=> people are switching to middle-way approach
+- Using "SQLX" library
+    - Quite fast & easy to use
+    - Fields mapping via querry text & struct tags
+- Using "SQLC"
+    - very fast & easy to code
+    - Automatic code generation (golang crud codes will be automatically generated for us)
+    - Catch SQL query error before generate codes
+    - full support Postgres
+    - "sqlc.dev": sudo snap install sqlc
+    - run "sqlc init"
