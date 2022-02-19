@@ -120,3 +120,7 @@
     - full support Postgres
     - "sqlc.dev": sudo snap install sqlc
     - run "sqlc init"
+
+## 5 - Unit test 
+
+## 6 - 
