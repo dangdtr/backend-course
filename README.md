@@ -123,4 +123,35 @@
 
 ## 5 - Unit test 
 
-## 6 - 
+## 6 - DB Transaction
+
+### 6.1 
+- A single unit of work
+- Often make up of multiple db operations
+
+### 6.2 - Transfer money
+
+- 5 operations:
+    - Create a transfer record with amout = x
+    - Create an account entry for acc 1 with amount = -x: moeny moving out of this
+    - Create an account entry for acc 2 with amount = x: moeny moving in of this
+    - Sub x from the balance of acc 1
+    - Add x to the balance of acc 2
+- Why do we need DB Trans?
+    - Reliable and consistent unit of work
+    - Isolation between programs that access the db concurrency
+- AICD property:
+    - Atomicity: All operations successfully of the trans fails and the db is unchanged
+    - Consistent: All data written to db must be valid, predefined the rules: constraints, cascades
+    - Isolation: Concurrent trans must not affect each other
+    - Durability: All data written by succesfully trans, cannot be lost
+- How to run SQL?
+    - Start a transaction with `BEGIN` statement -> normal SQL queries. 
+    - If all of them are succesful then `COMMIT` to make it permanent
+    - If any query fails, we `ROLLBACK` the trans -> prev queries of trans will be gone
+    
+-> store.go
+
+## 7 - DB TX LOCK & Handle deadlock in GO
+
+### 7.1 
