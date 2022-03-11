@@ -154,4 +154,11 @@
 
 ## 7 - DB TX LOCK & Handle deadlock in GO
 
-### 7.1 
+### 7.1 - TDD: Test Driven Development
+
+- Write test first -> improve the code until the test pass
+
+### 7.1 - Deadlock
+- Add "FOR NO KEY UPDATE" in SQL query to Get Account
+
+## 8 - How to avoid DB deadlock
